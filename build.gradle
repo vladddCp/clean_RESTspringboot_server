@@ -17,29 +17,30 @@ plugins {
 	id 'java'
 }
 
-group = 'com.springboot_'
-version = '0.0.1-SNAPSHOT'
+
 sourceCompatibility = '1.8'
+targetCompatibility = '1.8'
 
-
+apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
 
 dependencies {
-    // This dependency is exported to consumers, that is to say found on their compile classpath.
     api 'org.apache.commons:commons-math3:3.6.1'
-
-    // This dependency is used internally, and not exposed to consumers on their own compile classpath.
+	runtimeOnly 'com.h2database:h2'
+    testImplementation 'junit:junit:4.12'    
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
     implementation 'com.google.guava:guava:23.0'
-
-    // Use JUnit test framework
-    testImplementation 'junit:junit:4.12'
-    
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
-	runtimeOnly 'com.h2database:h2'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	compile 'org.springframework.boot:spring-boot-starter-data-jpa'
+	compile 'mysql:mysql-connector-java'
+}
+
+bootJar {
+    baseName = 'com.springboot_mysql'
+    version =  '0.1.0'
 }
 
 // In this section you declare where to find the dependencies of your project
